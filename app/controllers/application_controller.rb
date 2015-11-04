@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def find_invoice
   	Invoice.find(params[:id])
   end
+
+  def find_invoice_item
+  	InvoiceItem.find(params[:id])
+  end
 end
