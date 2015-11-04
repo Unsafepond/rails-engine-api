@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
   def find_item
     Item.find(params[:id])
   end
+
+  def find_transaction
+    Transaction.find(params[:id])
+  end
 end
