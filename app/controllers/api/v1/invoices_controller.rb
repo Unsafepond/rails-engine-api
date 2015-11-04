@@ -24,4 +24,11 @@ class Api::V1::InvoicesController < ApplicationController
 	def merchant
 		respond_with find_invoice.merchant
 	end
+
+	private
+
+		def find_invoice
+  		Invoice.find(params[:id])
+  	end
+  	
 end
