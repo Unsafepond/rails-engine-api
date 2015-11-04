@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def find_invoice_item
   	InvoiceItem.find(params[:id])
   end
+
+  def find_item
+    Item.find(params[:id])
+  end
 end
