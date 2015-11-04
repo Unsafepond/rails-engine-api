@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def find_merchant
   	Merchant.find(params[:id])
   end
+
+  def find_invoice
+  	Invoice.find(params[:id])
+  end
 end
