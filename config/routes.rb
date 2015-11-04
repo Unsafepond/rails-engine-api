@@ -17,6 +17,9 @@ Rails.application.routes.draw do
         get "invoice_items/:id/invoice", to: "invoice_items#invoice"
 
       resources :items, only: [:show], defaults: { format: 'json' }
+        get "items/:id/invoice_items", to: "items#invoice_items"
+        get "items/:id/merchant", to: "items#merchant"
+
       resources :customers, only: [:show], defaults: { format: 'json' }
       resources :transactions, only: [:show], defaults: { format: 'json' }
     end
