@@ -18,7 +18,10 @@ class Api::V1::InvoicesController < ApplicationController
 	end
 
 	def customer
-		# binding.pry
 		respond_with find_invoice.customer
+	end
+
+	def merchant
+		respond_with find_invoice.merchant
 	end
 end

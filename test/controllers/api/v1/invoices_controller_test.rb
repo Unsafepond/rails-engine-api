@@ -45,4 +45,13 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
     
     assert_equal "the dude", json_response["first_name"]
   end
+
+   test "#merchant" do
+  	merchant = Merchant.create(name: "the dude")
+  	invoice = invoices(:two)
+    invoice.update_attributes(merchant_id: merchant.id)
+    get :merchant, id: invoice.id, format: :json
+    
+    assert_equal "the dude", json_response["name"]
+  end
 end
