@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :merchants, only: [:show], defaults: { format: 'json' }
         get "/merchants/:id/items", to: "merchants#items"
+        get "/merchants/:id/invoices", to: "merchants#invoices"
 
       resources :invoices, only: [:show], defaults: { format: 'json' }
       resources :invoice_items, only: [:show], defaults: { format: 'json' }

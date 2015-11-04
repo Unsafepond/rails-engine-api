@@ -2,12 +2,14 @@ class Api::V1::MerchantsController < ApplicationController
 	respond_to :json
 
 	def show
-		respond_with Merchant.find(params[:id])
+		respond_with find_merchant
 	end
 
 	def items
-		merchant = Merchant.find(params[:id])
-		binding.pry
-		respond_with merchant.items
+		respond_with find_merchant.items
+	end
+
+	def invoices
+		respond_with find_merchant.invoices
 	end
 end

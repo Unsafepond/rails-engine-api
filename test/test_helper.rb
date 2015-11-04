@@ -2,8 +2,17 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require "minitest/pride"
+require "database_cleaner"
 
 class ActiveSupport::TestCase
+	DatabaseCleaner.strategy = :truncation
+	def setup
+		DatabaseCleaner.start
+	end
+
+	def teardown
+		DatabaseCleaner.clean
+	end
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
