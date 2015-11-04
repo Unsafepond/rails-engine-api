@@ -16,4 +16,14 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     
     assert_equal 1337, json_response.first["unit_price"]
   end
+
+   test "#merchant" do
+  	item = items(:two)
+    merchant = Merchant.create(name: "the dude")
+    item.update_attributes(merchant_id: merchant.id)
+
+    get :merchant, id: item.id, format: :json
+    
+    assert_equal "the dude", json_response["name"]
+  end
 end
