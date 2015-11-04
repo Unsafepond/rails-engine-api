@@ -1,3 +1,3 @@
 class Transaction < ActiveRecord::Base
-	has_one :invoice
+	belongs_to :invoice
 end
