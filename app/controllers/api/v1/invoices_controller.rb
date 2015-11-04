@@ -8,4 +8,8 @@ class Api::V1::InvoicesController < ApplicationController
 	def transactions
 		respond_with find_invoice.transactions
 	end
+
+	def invoice_items
+		respond_with find_invoice.invoice_items
+	end
 end
