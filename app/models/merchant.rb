@@ -3,6 +3,14 @@ class Merchant < ActiveRecord::Base
 	has_many :invoices
 
 	def revenue(params)
-		{ revenue: invoices.shipped.joins(:invoice_items).sum("quantity * (unit_price/100)") }
+		if params[:date]
+			revenue_by_date(params[:date])
+		else
+			{ revenue: invoices.shipped.joins(:invoice_items).sum("quantity * (unit_price/100)") }
+		end
+	end
+
+	def revenue_by_date(date)
+		{revenue: invoices.shipped.where(created_at: date).joins(:invoice_items).sum("quantity * (unit_price/100)") }
 	end
 end

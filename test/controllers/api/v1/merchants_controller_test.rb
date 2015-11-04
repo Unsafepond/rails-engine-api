@@ -36,6 +36,20 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     assert_equal 40.00, json_response["revenue"]
   end
 
+  test "#revenue by date" do
+    time = Time.now
+    invoice1 = Invoice.create(status: "shipped", merchant_id: merchant.id, created_at: time)
+    invoice2 = Invoice.create(status: "shipped", merchant_id: merchant.id, created_at: time)
+    invoice3 = Invoice.create(status: "shipped", merchant_id: merchant.id, created_at: (Time.now - 10))
+    InvoiceItem.create(quantity: 2, unit_price: 1500, invoice_id: invoice1.id)
+    InvoiceItem.create(quantity: 1, unit_price: 1000, invoice_id: invoice2.id)
+    InvoiceItem.create(quantity: 1, unit_price: 1000, invoice_id: invoice3.id)
+
+    get :revenue, id: merchant.id, date: time, format: :json
+
+    assert_equal 40.00, json_response["revenue"]
+  end
+
   private
 
     def merchant
