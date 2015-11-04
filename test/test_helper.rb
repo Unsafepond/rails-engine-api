@@ -3,9 +3,11 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require "minitest/pride"
 require "database_cleaner"
+require "simplecov"
 
 class ActiveSupport::TestCase
 	DatabaseCleaner.strategy = :truncation
+	SimpleCov.start("rails")
 	def setup
 		DatabaseCleaner.start
 	end
