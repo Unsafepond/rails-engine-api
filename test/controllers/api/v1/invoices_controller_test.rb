@@ -23,8 +23,26 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
     InvoiceItem.create(unit_price: 1337, invoice_id: invoice.id)
     InvoiceItem.create(unit_price: 58008, invoice_id: invoice.id)
     get :invoice_items, id: invoice.id, format: :json
-    # binding.pry
+   
     assert_equal 1337, json_response.first["unit_price"]
     assert_equal 58008, json_response[1]["unit_price"]
+  end
+
+  test "#items" do
+  	invoice = invoices(:two)
+  	item = items(:two)
+    InvoiceItem.create(unit_price: 1337, invoice_id: invoice.id, item_id: item.id)
+    get :items, id: invoice.id, format: :json
+    
+    assert_equal "this is an item", json_response.first["name"]
+  end
+
+  test "#customer" do
+  	invoice = invoices(:two)
+  	item = items(:two)
+    InvoiceItem.create(unit_price: 1337, invoice_id: invoice.id, item_id: item.id)
+    get :items, id: invoice.id, format: :json
+    
+    assert_equal "this is an item", json_response.first["name"]
   end
 end

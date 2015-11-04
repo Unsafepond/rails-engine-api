@@ -12,4 +12,8 @@ class Api::V1::InvoicesController < ApplicationController
 	def invoice_items
 		respond_with find_invoice.invoice_items
 	end
+
+	def items
+		respond_with find_invoice.items
+	end
 end
