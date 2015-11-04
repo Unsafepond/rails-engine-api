@@ -12,4 +12,11 @@ class Api::V1::ItemsController < ApplicationController
 	def merchant
 		respond_with find_item.merchant
 	end
+
+	private
+
+		def find_item
+	    Item.find(params[:id])
+	  end
+	  
 end
