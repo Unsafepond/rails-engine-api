@@ -38,11 +38,11 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
   end
 
   test "#customer" do
+  	customer = Customer.create(first_name: "the dude")
   	invoice = invoices(:two)
-  	item = items(:two)
-    InvoiceItem.create(unit_price: 1337, invoice_id: invoice.id, item_id: item.id)
-    get :items, id: invoice.id, format: :json
+    invoice.update_attributes(customer_id: customer.id)
+    get :customer, id: invoice.id, format: :json
     
-    assert_equal "this is an item", json_response.first["name"]
+    assert_equal "the dude", json_response["first_name"]
   end
 end

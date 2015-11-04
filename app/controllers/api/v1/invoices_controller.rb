@@ -16,4 +16,9 @@ class Api::V1::InvoicesController < ApplicationController
 	def items
 		respond_with find_invoice.items
 	end
+
+	def customer
+		# binding.pry
+		respond_with find_invoice.customer
+	end
 end

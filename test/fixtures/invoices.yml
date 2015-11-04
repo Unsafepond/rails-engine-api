@@ -9,4 +9,5 @@ one:
 #
 two:
   status: "shipped"
+  customer_id: 1
 #  column: value
