@@ -9,4 +9,13 @@ class Item < ActiveRecord::Base
 		end
 		sorted.first(item_quantity)
 	end
+
+	def self.most_items(item_quantity)
+		item_pairs = Item.all.map do |item|
+			[item, item.invoices.shipped.sum("quantity")]
+		end
+		item_pairs.max_by(item_quantity) { |_item, quantity| quantity}.flat_map do |item, _quantity|
+			item
+		end
+	end
 end

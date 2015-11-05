@@ -46,4 +46,24 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     assert_equal "dawg", json_response.first["name"]
     assert_equal "this is an item", json_response[2]["name"] 
   end
+
+  test "#most_items(quantity)" do
+    item = items(:one)
+    item2 = items(:two)
+    item3 = items(:three)
+    item4 = items(:four)
+    invoice = Invoice.create(status: "shipped")
+    invoice2 = Invoice.create(status: "shipped")
+    invoice3 = Invoice.create(status: "shipped")
+    invoice4 = Invoice.create(status: "pending")
+    invoice_item = InvoiceItem.create(unit_price: 2000, quantity: 2, item_id: item.id, invoice_id: invoice.id)
+    invoice_item2 = InvoiceItem.create(unit_price: 1000, quantity: 1, item_id: item3.id, invoice_id: invoice2.id)
+    invoice_item3 = InvoiceItem.create(unit_price: 3000, quantity: 2, item_id: item3.id, invoice_id: invoice3.id)
+    invoice_item4 = InvoiceItem.create(unit_price: 1000, quantity: 1, item_id: item4.id, invoice_id: invoice4.id)
+
+    get :most_items, quantity: 2, format: :json
+    binding.pry
+    assert_equal "dawg", json_response.first["name"]
+    assert_equal "item", json_response.last["name"] 
+  end
 end
