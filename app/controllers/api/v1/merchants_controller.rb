@@ -5,6 +5,10 @@ class Api::V1::MerchantsController < ApplicationController
 		respond_with find_merchant
 	end
 
+	def index
+		respond_with Merchant.all
+	end
+
 	def find
 		respond_with Merchant.find_by(find_params)
 	end
