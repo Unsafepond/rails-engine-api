@@ -5,6 +5,10 @@ class Api::V1::InvoiceItemsController < ApplicationController
 		respond_with find_invoice_item
 	end
 
+	def index
+		respond_with InvoiceItem.all
+	end
+
 	def find
 		respond_with InvoiceItem.find_by(find_params)
 	end
