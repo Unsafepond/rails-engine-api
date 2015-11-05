@@ -8,6 +8,12 @@ class Api::V1::TransactionsControllerTest < ActionController::TestCase
     assert_equal "success", json_response["result"]
   end
 
+  test "#index" do
+    get :index, format: :json
+
+    assert_equal 2, json_response.count
+  end
+
   test "#find" do
     transaction = Transaction.create(result: "done")
     get :find, id: transaction.id, format: :json

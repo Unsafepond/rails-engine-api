@@ -5,6 +5,10 @@ class Api::V1::CustomersController < ApplicationController
 		respond_with find_customer
 	end
 
+	def index
+		respond_with Customer.all
+	end
+
 	def find
 		respond_with Customer.find_by(find_params)
 	end

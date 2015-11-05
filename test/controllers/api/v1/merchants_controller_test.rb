@@ -7,6 +7,12 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     assert_equal "dude", json_response["name"]
   end
 
+  test "#index" do
+    get :index, format: :json
+
+    assert_equal 3, json_response.count
+  end
+
   test "#find" do
     get :find, id: merchant.id, format: :json
     

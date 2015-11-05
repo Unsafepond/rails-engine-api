@@ -5,6 +5,10 @@ class Api::V1::TransactionsController < ApplicationController
 		respond_with find_transaction
 	end
 
+	def index
+		respond_with Transaction.all
+	end
+
 	def find
 		respond_with Transaction.find_by(find_params)
 	end

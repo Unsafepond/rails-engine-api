@@ -8,6 +8,12 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     assert_equal "things2", json_response["last_name"]
   end
 
+  test "#index" do
+    get :index, format: :json
+
+    assert_equal 2, json_response.count
+  end
+
   test "#find" do
     customer = Customer.create(first_name: "dude")
     get :find, id: customer.id, format: :json

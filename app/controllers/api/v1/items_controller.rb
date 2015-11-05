@@ -5,6 +5,10 @@ class Api::V1::ItemsController < ApplicationController
 		respond_with find_item
 	end
 
+	def index
+		respond_with Item.all
+	end
+
 	def find
 		respond_with Item.find_by(find_params)
 	end
