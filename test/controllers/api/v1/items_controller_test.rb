@@ -62,7 +62,7 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     invoice_item4 = InvoiceItem.create(unit_price: 1000, quantity: 1, item_id: item4.id, invoice_id: invoice4.id)
 
     get :most_items, quantity: 2, format: :json
-    binding.pry
+    
     assert_equal "dawg", json_response.first["name"]
     assert_equal "item", json_response.last["name"] 
   end
