@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
       resources :invoices, only: [:show], defaults: { format: 'json' }
         get "/invoices/find", to: "invoices#find"
+        get "/invoices/find_all", to: "invoices#find_all"
         get "/invoices/:id/transactions", to: "invoices#transactions"
         get "/invoices/:id/invoice_items", to: "invoices#invoice_items"
         get "/invoices/:id/items", to: "invoices#items"
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
 
       resources :transactions, only: [:show], defaults: { format: 'json' }
         get "/transactions/find", to: "transactions#find"
+        get "/transactions/find_all", to: "transactions#find_all"
         get "transactions/:id/invoice", to: "transactions#invoice"
 
     end
