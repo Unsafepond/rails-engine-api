@@ -7,6 +7,21 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     assert_equal "dude", json_response["name"]
   end
 
+  test "#find" do
+    get :find, id: merchant.id, format: :json
+    
+    assert_equal "dude", json_response["name"]
+  end
+
+  test "#find_all" do
+    Merchant.create(name: "dude")
+    Merchant.create(name: "dude")
+
+    get :find_all, name: merchant.name, format: :json
+    
+    assert_equal 3, json_response.count
+  end
+
   test "#items" do
     Item.create(name: "test", merchant_id: merchant.id)
     Item.create(name: "test2", merchant_id: merchant.id)
