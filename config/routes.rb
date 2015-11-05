@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       resources :customers, only: [:show], defaults: { format: 'json' }
         get "/customers/:id/invoices", to: "customers#invoices"
         get "/customers/:id/transactions", to: "customers#transactions"
+        get "/customers/:id/favorite_merchant", to: "customers#favorite_merchant"
 
       resources :transactions, only: [:show], defaults: { format: 'json' }
         get "transactions/:id/invoice", to: "transactions#invoice"
