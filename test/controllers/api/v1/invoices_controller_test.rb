@@ -8,6 +8,12 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
     assert_equal "shipped", json_response["status"]
   end
 
+  test "#index" do
+    get :index, format: :json
+
+    assert_equal 2, json_response.count
+  end
+
   test "#find" do
     invoice = Invoice.create(status: "done")
     get :find, id: invoice.id, format: :json
