@@ -6,6 +6,7 @@ Rails.application.routes.draw do
         get "/merchants/:id/invoices", to: "merchants#invoices"
         get "/merchants/:id/revenue", to: "merchants#revenue"
         get "/merchants/:id/favorite_customer", to: "merchants#favorite_customer"
+        get "/merchants/:id/customers_with_pending_invoices", to: "merchants#customers_with_pending_invoices"
 
       resources :invoices, only: [:show], defaults: { format: 'json' }
         get "/invoices/:id/transactions", to: "invoices#transactions"
