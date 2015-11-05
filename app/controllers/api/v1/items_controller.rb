@@ -5,6 +5,14 @@ class Api::V1::ItemsController < ApplicationController
 		respond_with find_item
 	end
 
+	def find
+		respond_with Item.find_by(find_params)
+	end
+
+	def find_all
+		respond_with Item.where(find_params)
+	end
+
 	def invoice_items
 		respond_with find_item.invoice_items
 	end
@@ -26,5 +34,16 @@ class Api::V1::ItemsController < ApplicationController
 		def find_item
 	    Item.find(params[:id])
 	  end
+
+	  def find_params
+    	params.permit(:id,
+                  :item_id,
+                  :name,
+                  :description,
+                  :unit_price,
+                  :merchant_id,
+                  :created_at,
+                  :updated_at)
+  	end
 	  
 end

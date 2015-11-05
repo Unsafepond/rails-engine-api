@@ -22,11 +22,13 @@ Rails.application.routes.draw do
 
       resources :invoice_items, only: [:show], defaults: { format: 'json' }
         get "/invoice_items/find", to: "invoice_items#find"
+        get "/invoice_items/find_all", to: "invoice_items#find_all"
         get "/invoice_items/:id/item", to: "invoice_items#item"
         get "/invoice_items/:id/invoice", to: "invoice_items#invoice"
 
       resources :items, only: [:show], defaults: { format: 'json' }
         get "/items/find", to: "items#find"
+        get "/items/find_all", to: "items#find_all"
         get "/items/:id/invoice_items", to: "items#invoice_items"
         get "/items/:id/merchant", to: "items#merchant"
         get "/items/most_revenue", to: "items#most_revenue"

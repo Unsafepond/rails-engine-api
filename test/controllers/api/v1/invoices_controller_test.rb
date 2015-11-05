@@ -16,7 +16,7 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
   end
 
   test "#find_all" do
-    transaction = Invoice.create(status: "done")
+    Invoice.create(status: "done")
     Invoice.create(status: "done")
 
     get :find_all, status: "done", format: :json
