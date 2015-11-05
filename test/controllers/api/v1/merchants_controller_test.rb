@@ -78,6 +78,20 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     assert_equal "stuff", json_response.first["first_name"]
   end
 
+  test "#most_revenue" do
+    merchant2 = merchants(:one)
+    merchant3 = merchants(:three)
+    invoice1 = Invoice.create(status: "shipped", merchant_id: merchant.id)
+    invoice2 = Invoice.create(status: "shipped", merchant_id: merchant3.id)
+    InvoiceItem.create(quantity: 2, unit_price: 1500, invoice_id: invoice1.id)
+    InvoiceItem.create(quantity: 1, unit_price: 1000, invoice_id: invoice2.id)
+
+    get :most_revenue, quantity: 2, format: :json
+    
+    assert_equal "dude", json_response.first["name"]
+    assert_equal "bleh", json_response.last["name"]
+  end
+
   private
 
     def merchant
