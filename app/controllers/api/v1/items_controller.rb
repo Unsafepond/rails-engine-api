@@ -13,6 +13,10 @@ class Api::V1::ItemsController < ApplicationController
 		respond_with find_item.merchant
 	end
 
+	def most_revenue
+		respond_with Item.most_revenue(params[:quantity])
+	end
+
 	private
 
 		def find_item
