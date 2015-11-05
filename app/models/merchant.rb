@@ -17,4 +17,8 @@ class Merchant < ActiveRecord::Base
 	def favorite_customer
 		invoices.shipped.max_by { |invoice| invoice.customer}.customer
 	end
+
+	def customers_with_pending_invoices
+		invoices.pending.flat_map{ |invoice| Customer.find(invoice.customer_id)}
+	end
 end

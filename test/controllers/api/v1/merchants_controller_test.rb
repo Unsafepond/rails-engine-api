@@ -63,6 +63,21 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     assert_equal "stuff", json_response["first_name"]
   end
 
+  test "#customers_with_pending_invoices" do
+    customer1 = customers(:one)
+    customer2 = customers(:two)
+    invoice1 = Invoice.create(status: "shipped", merchant_id: merchant.id, customer_id: customer1.id)
+    invoice2 = Invoice.create(status: "pending", merchant_id: merchant.id, customer_id: customer1.id)
+    invoice3 = Invoice.create(status: "pending", merchant_id: merchant.id, customer_id: customer2.id)
+    t1 = Transaction.create(result: "success", invoice_id: invoice1.id)
+    t2 = Transaction.create(result: "pending", invoice_id: invoice2.id)
+    t3 = Transaction.create(result: "pending", invoice_id: invoice3.id)
+
+    get :customers_with_pending_invoices, id: merchant.id, format: :json
+    
+    assert_equal "stuff", json_response.first["first_name"]
+  end
+
   private
 
     def merchant

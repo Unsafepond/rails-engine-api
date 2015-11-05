@@ -9,4 +9,8 @@ class Invoice < ActiveRecord::Base
 	def self.shipped
 		self.where(status: "shipped")
 	end
+
+	def self.pending
+		joins(:transactions).where(status: "pending")
+	end
 end
