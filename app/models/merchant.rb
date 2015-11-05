@@ -21,4 +21,11 @@ class Merchant < ActiveRecord::Base
 	def customers_with_pending_invoices
 		invoices.pending.flat_map{ |invoice| Customer.find(invoice.customer_id)}
 	end
+
+	def self.most_revenue(merchant_quantity)
+		grouped = Merchant.all.map do |merchant|
+      [merchant, merchant.invoices.shipped.joins(:invoice_items).sum("quantity * unit_price")]
+    end
+    grouped.sort_by { |merchant| -(merchant.last) }.map(&:first).first(merchant_quantity)
+	end
 end
