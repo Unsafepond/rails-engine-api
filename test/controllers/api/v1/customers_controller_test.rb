@@ -26,4 +26,18 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     
     assert_equal "test1", json_response.first["result"]
   end
+
+  test "#favorite_merchant" do
+    customer = customers(:two)
+    merchant = merchants(:one)
+    merchant2 = merchants(:two)
+    invoice1 = Invoice.create(status: "shipped", merchant_id: merchant.id, customer_id: customer.id)
+    invoice2 = Invoice.create(status: "shipped", merchant_id: merchant2.id, customer_id: customer.id)
+    invoice3 = Invoice.create(status: "shipped", merchant_id: merchant2.id, customer_id: customer.id)
+    
+
+    get :favorite_merchant, id: customer.id, format: :json
+    
+    assert_equal "dude", json_response["name"]
+  end
 end
