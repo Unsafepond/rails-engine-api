@@ -8,6 +8,22 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     assert_equal "this is an item", json_response["name"]
   end
 
+  test "#find" do
+    item = Item.create(name: "done")
+    get :find, id: item.id, format: :json
+    
+    assert_equal "done", json_response["name"]
+  end
+
+  test "#find_all" do
+    Item.create(name: "done")
+    Item.create(name: "done")
+
+    get :find_all, name: "done", format: :json
+    
+    assert_equal 2, json_response.count
+  end
+
   test "#invoice_items" do
   	item = items(:two)
     invoice_item = InvoiceItem.create(unit_price: 1337, item_id: item.id)

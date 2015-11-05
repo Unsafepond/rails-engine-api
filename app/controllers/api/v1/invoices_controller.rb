@@ -5,6 +5,14 @@ class Api::V1::InvoicesController < ApplicationController
 		respond_with find_invoice
 	end
 
+	def find
+		respond_with Invoice.find_by(find_params)
+	end
+
+	def find_all
+		respond_with Invoice.where(find_params)
+	end
+
 	def transactions
 		respond_with find_invoice.transactions
 	end
@@ -29,6 +37,16 @@ class Api::V1::InvoicesController < ApplicationController
 
 		def find_invoice
   		Invoice.find(params[:id])
+  	end
+
+  	def find_params
+    	params.permit(:id,
+                  :invoice_id,
+                  :customer_id,
+                  :merchant_id,
+                  :status,
+                  :created_at,
+                  :updated_at)
   	end
   	
 end

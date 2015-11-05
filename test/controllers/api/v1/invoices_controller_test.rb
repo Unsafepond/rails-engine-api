@@ -8,6 +8,22 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
     assert_equal "shipped", json_response["status"]
   end
 
+  test "#find" do
+    invoice = Invoice.create(status: "done")
+    get :find, id: invoice.id, format: :json
+    
+    assert_equal "done", json_response["status"]
+  end
+
+  test "#find_all" do
+    Invoice.create(status: "done")
+    Invoice.create(status: "done")
+
+    get :find_all, status: "done", format: :json
+    
+    assert_equal 2, json_response.count
+  end
+
   test "#transactions" do
   	invoice = invoices(:two)
     Transaction.create(credit_card_number: "test", invoice_id: invoice.id)

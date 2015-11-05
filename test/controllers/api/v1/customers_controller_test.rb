@@ -8,6 +8,22 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     assert_equal "things2", json_response["last_name"]
   end
 
+  test "#find" do
+    customer = Customer.create(first_name: "dude")
+    get :find, id: customer.id, format: :json
+    
+    assert_equal "dude", json_response["first_name"]
+  end
+
+  test "#find_all" do
+    customer = Customer.create(first_name: "dude")
+    Customer.create(first_name: "dude")
+
+    get :find_all, first_name: customer.first_name, format: :json
+    
+    assert_equal 2, json_response.count
+  end
+
   test "#invoices" do
   	customer = customers(:two)
     invoice = Invoice.create(status: "test1", customer_id: customer.id)
